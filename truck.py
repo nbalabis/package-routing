@@ -3,6 +3,7 @@ class Truck:
         self.max_packages = 16
         self.packages = []
         self.name = str(name)
+        # self.location = ????
 
     def load_package(self, package):
         if not self.is_full():

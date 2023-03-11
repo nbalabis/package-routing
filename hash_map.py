@@ -1,13 +1,17 @@
 class HashMap:
     def __init__(self):
-        self.size = 10
+        self.size = 64
         self.map = [None] * self.size
 
     # Hash a key
     def __get_hash(self, key):
-        return int(key) % self.size
+        hash_key = 0
+        for char in str(key):
+            hash_key += ord(char)
+        return hash_key % self.size
 
     # Add a key-value pair to the hash table or update an existing one
+    # I want to prevent accidentally updating
     def add(self, key, value):
         hashed_key = self.__get_hash(key)
         new_key_value = [key, value]
@@ -43,3 +47,9 @@ class HashMap:
                 if key_value[0] == key:
                     return key_value[1]
         return None
+
+    def print(self):
+        print('---HASHMAP---')
+        for item in self.map:
+            if item is not None:
+                print(str(item))
