@@ -5,5 +5,9 @@ class Location:
         self.address = address
         self.distances = distances
 
+    # Get distance to another Location
     def get_distance_to(self, location):
-        return self.distances[location.id]
+        distance = self.distances[location.id]
+        if distance == '':
+            distance = location.get_distance_to(self)
+        return float(distance)
