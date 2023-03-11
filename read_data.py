@@ -2,6 +2,7 @@ import csv
 from hash_map import HashMap
 from package import Package
 from truck import Truck
+from location import Location
 
 packages = HashMap()
 distance_matrix = []
@@ -30,19 +31,6 @@ with open('./data/distances.csv') as distance_csv:
     distance_reader = csv.reader(distance_csv, delimiter=',')
     for address in distance_reader:
         distance_matrix.append(address)
-
-
-# Create location class
-class Location:
-    def __init__(self, location_id, name, address, distances):
-        self.id = location_id
-        self.name = name
-        self.address = address
-        self.distances = distances
-
-    def get_distance_to(self, location):
-        return self.distances[locations.get(location).id]
-
 
 # Create location objects with corresponding distance matrix row
 with open('./data/location_names.csv') as location_csv:
