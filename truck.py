@@ -1,9 +1,12 @@
+from nna import nna
+
+
 class Truck:
-    def __init__(self, name):
+    def __init__(self, name, location):
         self.max_packages = 16
         self.packages = []
         self.name = str(name)
-        # self.location = ????
+        self.location = location
 
     def load_package(self, package):
         if not self.is_full():
@@ -13,8 +16,31 @@ class Truck:
         print('ERROR: TRUCK ' + self.name + ' IS FULL')
         return False
 
+    def deliver_packages(self):
+        packages_to_deliver = []
+        for package in self.packages:
+            if package.location == self.location:
+                packages_to_deliver.append(package)
+        for package in packages_to_deliver:
+            print('     Package ' + package.id + ' delivered')
+            package.update_status('Delivered')
+            self.packages.remove(package)
+
     def get_packages(self):
-        print(self.packages)
+        return self.packages
 
     def is_full(self):
         return not len(self.packages) < self.max_packages
+
+    def next_stop(self):
+        # Find the nearest neighbor
+        package = nna(self.location, self.packages)
+        print('Delivering package: ' + package.id)
+
+        # Travel to it (how to make this take time?)
+        print('     Travelling ' + str(
+            package.location.get_distance_to(self.location)) + ' miles to ' + package.location.address)
+        self.location = package.location
+
+        # Remove all packages that have that address once you get to it
+        self.deliver_packages()
