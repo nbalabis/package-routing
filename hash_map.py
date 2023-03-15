@@ -52,4 +52,12 @@ class HashMap:
         print('---HASHMAP---')
         for item in self.map:
             if item is not None:
-                print(str(item))
+                print(str(item[0]))
+
+    def get_all(self):
+        all_items = []
+        for item in self.map:
+            if item is not None:
+                for obj in item:
+                    all_items.append(obj[1])
+        return all_items

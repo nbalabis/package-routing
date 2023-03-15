@@ -2,11 +2,12 @@ from nna import nna
 
 
 class Truck:
-    def __init__(self, name, location):
+    def __init__(self, name, hub):
         self.max_packages = 16
         self.packages = []
         self.name = str(name)
-        self.location = location
+        self.hub = hub
+        self.location = hub
 
     def load_package(self, package):
         if not self.is_full():
@@ -44,3 +45,11 @@ class Truck:
 
         # Remove all packages that have that address once you get to it
         self.deliver_packages()
+
+    def start(self):
+        # Special case: no packages left - return to hub
+        while len(self.packages) > 0:
+            self.next_stop()
+
+        print('All packages delivered! Returning to hub')
+        self.location = self.hub

@@ -45,9 +45,3 @@ with open('./data/package_info.csv') as package_csv:
             truck2.load_package(packages.get(package_id))
         else:
             truck3.load_package(packages.get(package_id))
-
-truck1.next_stop()
-truck1.next_stop()
-truck1.next_stop()
-truck1.next_stop()
-truck1.next_stop()
