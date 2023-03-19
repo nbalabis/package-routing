@@ -1,15 +1,10 @@
-import time
-
+import convert_time
 from read_data import packages
 
 
-def local_time(hours, minutes):
-    return time.mktime((2023, 3, 20, hours, minutes, 0, 0, 0, 0))
-
-
 def all_packages(hours, minutes=0):
-    epoch_time = local_time(hours, minutes)
-    print('---ALL PACKAGES AT ' + time.ctime(epoch_time)[11:16] + '---')
+    epoch_time = convert_time.to_epoch(hours, minutes)
+    print('---ALL PACKAGES AT ' + convert_time.to_readable(epoch_time) + '---')
     delivered = []
     transit = []
     hub = []

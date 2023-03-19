@@ -1,6 +1,6 @@
 from read_data import packages, locations, truck1, truck2, truck3
 import lookup
-from time import ctime
+import convert_time
 
 deliveries_completed = False
 
@@ -35,7 +35,7 @@ while user_input != 'quit':
             start()
             print(f"""--------------------------------------------------------
           All packages successfully delivered!
-     The final truck returned to the Hub at {ctime(max([truck1.time, truck2.time, truck3.time]))[11:16]}
+     The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}
      The trucks traveled a total distance of {truck1.total_distance + truck2.total_distance + truck3.total_distance} miles
 --------------------------------------------------------
 """)

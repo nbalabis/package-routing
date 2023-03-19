@@ -3,7 +3,7 @@ from hash_map import HashMap
 from package import Package
 from truck import Truck
 from location import Location
-from time import mktime
+import convert_time
 
 packages = HashMap()
 distance_matrix = []
@@ -27,8 +27,8 @@ with open('./data/location_names.csv') as location_csv:
 
 # Initialize trucks
 hub = locations.get('4001 South 700 East')
-on_time_departure = mktime((2023, 3, 20, 8, 0, 0, 0, 0, 0))
-late_departure = mktime((2023, 3, 20, 10, 20, 0, 0, 0, 0))
+on_time_departure = convert_time.to_epoch(8)
+late_departure = convert_time.to_epoch(10, 20)
 truck1 = Truck(1, hub, on_time_departure)
 truck2 = Truck(2, hub, on_time_departure)
 truck3 = Truck(3, hub, late_departure)
