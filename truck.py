@@ -56,7 +56,7 @@ class Truck:
         while len(self.packages) > 0:
             self.next_stop()
         print('All packages delivered! Returning to hub at ' + time.ctime(self.time)[11:16])
-        print('     Travelled a total of ' + str(self.total_distance) + 'miles')
+        print('     Travelled a total of ' + str(self.total_distance) + 'miles \n')
         self.location = self.hub
 
     def print_packages(self):
@@ -69,3 +69,4 @@ class Truck:
         for package in self.get_packages():
             if package.notes != '':
                 print('          ' + str(package.id) + ': ' + package.notes)
+        print('')

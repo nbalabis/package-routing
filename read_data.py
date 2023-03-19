@@ -28,7 +28,6 @@ with open('./data/location_names.csv') as location_csv:
 # Initialize trucks
 hub = locations.get('4001 South 700 East')
 on_time_departure = mktime((2023, 3, 20, 8, 0, 0, 0, 0, 0))
-# TODO: CHANGE INCORRECT ADDRESS
 late_departure = mktime((2023, 3, 20, 10, 20, 0, 0, 0, 0))
 truck1 = Truck(1, hub, on_time_departure)
 truck2 = Truck(2, hub, on_time_departure)

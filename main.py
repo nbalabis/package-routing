@@ -1,8 +1,9 @@
-from read_data import packages, truck1, truck2, truck3
+from read_data import packages, locations, truck1, truck2, truck3
 import time
 
 truck1.start()
 truck2.start()
+packages.get(9).update_location(locations.get('410 S State St'))
 truck3.start()
 
 
@@ -33,7 +34,7 @@ def get_all_packages(epoch_time):
     print('          ', end="")
     for package in delivered:
         print(str(package.id), end=" ")
-    print('')
+    print('\n')
 
 
 def local_time(hours, seconds=0):

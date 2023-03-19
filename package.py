@@ -12,3 +12,7 @@ class Package:
     # Updates package status in hash map
     def update_status(self, status):
         self.status = status
+
+    def update_location(self, location):
+        print('Updating package ' + str(self.id) + ' delivery address to ' + location.address + '\n')
+        self.location = location
