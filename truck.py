@@ -2,13 +2,13 @@ from nna import nna
 
 
 class Truck:
-    def __init__(self, name, hub):
+    def __init__(self, name, hub, departure_time):
         self.max_packages = 16
         self.packages = []
         self.name = str(name)
         self.hub = hub
         self.location = hub
-        self.time = 8
+        self.time = departure_time
 
     def load_package(self, package):
         if not self.is_full():

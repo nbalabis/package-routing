@@ -26,9 +26,9 @@ with open('./data/location_names.csv') as location_csv:
 
 # Initialize trucks
 hub = locations.get('4001 South 700 East')
-truck1 = Truck(1, hub)
-truck2 = Truck(2, hub)
-truck3 = Truck(3, hub)
+truck1 = Truck(1, hub, 8)
+truck2 = Truck(2, hub, 8)
+truck3 = Truck(3, hub, 8)
 
 # Load package data into a hash table
 with open('./data/package_info.csv') as package_csv:
