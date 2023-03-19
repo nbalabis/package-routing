@@ -1,3 +1,5 @@
+import time
+
 from nna import nna
 
 
@@ -9,6 +11,8 @@ class Truck:
         self.hub = hub
         self.location = hub
         self.time = departure_time
+        self.speed = 18
+        self.total_distance = 0
 
     def load_package(self, package):
         if not self.is_full():
@@ -38,7 +42,11 @@ class Truck:
 
     def next_stop(self):
         package = nna(self.location, self.packages)
-        self.time += (60 * 60)
+        distance = package.location.get_distance_to(self.location)
+        self.total_distance += distance
+        time_in_seconds = ((1 / self.speed) * distance) * (60 * 60)
+        # print('It would take this truck ' + str(time_in_seconds) + 'hrs to drive ' + str(distance) + 'mi')
+        self.time += time_in_seconds
         self.location = package.location
         self.deliver_packages()
 
@@ -46,5 +54,6 @@ class Truck:
         print('Truck ' + self.name + ' leaving the Hub')
         while len(self.packages) > 0:
             self.next_stop()
-        print('All packages delivered! Returning to hub')
+        print('All packages delivered! Returning to hub at' + time.ctime(self.time)[11:16])
+        print('Travelled a total of ' + str(self.total_distance) + 'miles')
         self.location = self.hub
