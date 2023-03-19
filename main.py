@@ -7,12 +7,7 @@ truck2.start()
 packages.get(9).update_location(locations.get('410 S State St'))
 truck3.start()
 
-
-def local_time(hours, minutes=0):
-    return mktime((2023, 3, 20, hours, minutes, 0, 0, 0, 0))
-
-
-lookup.all_packages(local_time(7))
-lookup.all_packages(local_time(9))
-lookup.all_packages(local_time(10))
-lookup.all_packages(local_time(12, 30))
+lookup.all_packages(7)
+lookup.all_packages(9)
+lookup.all_packages(10)
+lookup.all_packages(12, 30)

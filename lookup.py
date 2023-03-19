@@ -3,7 +3,12 @@ import time
 from read_data import packages
 
 
-def all_packages(epoch_time):
+def local_time(hours, minutes):
+    return time.mktime((2023, 3, 20, hours, minutes, 0, 0, 0, 0))
+
+
+def all_packages(hours, minutes=0):
+    epoch_time = local_time(hours, minutes)
     print('---ALL PACKAGES AT ' + time.ctime(epoch_time)[11:16] + '---')
     delivered = []
     transit = []
