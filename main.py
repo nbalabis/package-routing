@@ -41,6 +41,6 @@ def local_time(hours, seconds=0):
 
 
 get_all_packages(local_time(7))
-get_all_packages(local_time(8))
-get_all_packages(local_time(8, 15))
-get_all_packages(local_time(9, 25))
+get_all_packages(local_time(9))
+get_all_packages(local_time(10))
+get_all_packages(local_time(12, 30))
