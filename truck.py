@@ -1,4 +1,4 @@
-import time
+from time import ctime
 
 from nna import nna
 
@@ -51,7 +51,7 @@ class Truck:
 
     def start(self):
         self.print_packages()
-        print('Truck ' + self.name + ' leaving the Hub at ' + time.ctime(self.time)[11:16])
+        print('Truck ' + self.name + ' leaving the Hub at ' + ctime(self.time)[11:16])
         while len(self.packages) > 0:
             self.next_stop()
         print('     All packages delivered! Returning to hub')
@@ -63,7 +63,7 @@ class Truck:
         time_in_seconds = ((1 / self.speed) * distance) * (60 * 60)
         self.time += time_in_seconds
         self.location = self.hub
-        print('Truck ' + self.name + ' arriving at the Hub at ' + time.ctime(self.time)[11:16])
+        print('Truck ' + self.name + ' arriving at the Hub at ' + ctime(self.time)[11:16])
         print('     Travelled a total of ' + str(self.total_distance) + 'miles \n')
 
     def print_packages(self):
