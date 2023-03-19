@@ -6,6 +6,8 @@ class Package:
         self.mass = data[6]
         self.notes = data[7]
         self.status = 'At Hub'
+        self.load_time = None
+        self.delivery_time = None
 
     # Updates package status in hash map
     def update_status(self, status):
