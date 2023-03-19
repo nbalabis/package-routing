@@ -1,20 +1,21 @@
 from read_data import packages, truck1, truck2, truck3
+import time
 
 truck1.start()
 truck2.start()
 truck3.start()
 
 
-def get_all_packages(time):
-    print('---ALL PACKAGES AT ' + str(time) + '---')
+def get_all_packages(epoch_time):
+    print('---ALL PACKAGES AT ' + time.ctime(epoch_time)[11:16] + '---')
     delivered = []
     transit = []
     hub = []
 
     for package in packages.get_all():
-        if package.delivery_time <= time:
+        if package.delivery_time <= epoch_time:
             delivered.append(package)
-        elif package.load_time <= time:
+        elif package.load_time <= epoch_time:
             transit.append(package)
         else:
             hub.append(package)
@@ -35,7 +36,11 @@ def get_all_packages(time):
     print('')
 
 
-get_all_packages(7)
-get_all_packages(8)
-get_all_packages(12)
-get_all_packages(23)
+def local_time(hours, seconds=0):
+    return time.mktime((2023, 3, 20, hours, seconds, 0, 0, 0, 0))
+
+
+get_all_packages(local_time(7))
+get_all_packages(local_time(8))
+get_all_packages(local_time(12))
+get_all_packages(local_time(23))

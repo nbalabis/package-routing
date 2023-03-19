@@ -38,7 +38,7 @@ class Truck:
 
     def next_stop(self):
         package = nna(self.location, self.packages)
-        self.time += 1
+        self.time += (60 * 60)
         self.location = package.location
         self.deliver_packages()
 
