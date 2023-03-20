@@ -1,3 +1,4 @@
+import ui
 from read_data import packages, locations, truck1, truck2, truck3
 import lookup
 import convert_time
@@ -10,41 +11,6 @@ def start():
     truck2.start()
     packages.get(9).update_location(locations.get('410 S State St'))
     truck3.start()
-
-
-def get_help():
-    if lookup_input == "":
-        print('\nPlease choose from the list of available commands:')
-        if not deliveries_completed:
-            print("     -Type 'start' to begin package routing")
-        else:
-            print("     -Type 'lookup' to view packages at any point during the delivery process")
-            print("     -Type 'info' to see an overview of the package deliveries")
-    else:
-        print('---------------------------------------------------------------------')
-        print("     -Type 'cancel' to leave the Package Lookup Menu")
-    print("     -Type 'quit' to exit the program")
-    print("     -Type 'help' at any time to see a list of all available commands\n")
-
-
-def get_lookup_help():
-    print("\nChoose an identifier to view a filtered list of packages at a given time:")
-    print("     -Type 'id' to view a specific package")
-    print("     -Type 'address' to filter by delivery address")
-    print("     -Type 'deadline' to filter by delivery deadline")
-    print("     -Type 'city' to filter by delivery city")
-    print("     -Type 'zip' to filter by delivery zip code")
-    print("     -Type 'weight' to filter by package weight")
-    print("     -Type 'status' to filter by delivery status\n")
-    print('                                   -OR-\n')
-    print("     -Type 'all' to view the statuses of all packages at a given time\n")
-
-
-def exit_program():
-    print('\n-------------------------------------------------------')
-    print('     THANK YOU FOR USING THE WGUPS ROUTING PROGRAM')
-    print('-------------------------------------------------------')
-    exit()
 
 
 def get_info():
@@ -115,62 +81,18 @@ while user_input != 'quit':
             print("\nDeliveries have not been completed yet.")
             print("     -Type 'start' to begin package routing\n")
         else:
-            print('-----------------------------')
-            print('     PACKAGE LOOKUP MENU')
-            print('-----------------------------')
-            get_lookup_help()
-            lookup_input = input(':').lower()
-            while lookup_input != 'cancel':
-                if lookup_input == 'quit':
-                    exit_program()
-                elif lookup_input == 'help':
-                    get_lookup_help()
-                    get_help()
-                elif lookup_input == 'all':
-                    print('\nEnter a valid time between 00:00 and 23:59\n')
-                    menu_input = input(':').lower()
-                    while menu_input != 'cancel':
-                        if menu_input == 'quit':
-                            exit_program()
-                        elif menu_input == 'help':
-                            print('\nEnter a valid time between 00:00 and 23:59')
-                            get_help()
-                        else:
-                            try:
-                                hours = int(menu_input[0:menu_input.find(':')])
-                                minutes = int(menu_input[menu_input.find(':') + 1:len(menu_input)])
-                            except:
-                                print('\nInvalid entry.')
-                                print('Please enter a valid time between 00:00 and 23:59\n')
-                            else:
-                                if 24 > hours > -1 and 60 > minutes > -1 and ':' in menu_input:
-                                    lookup.all_packages(hours, minutes)
-                                else:
-                                    print('\nInvalid entry.')
-                                    print('Please enter a valid time between 00:00 and 23:59\n')
-
-                        menu_input = input(':').lower()
-                    if menu_input == 'cancel':
-                        print('-----------------------------')
-                        print('     PACKAGE LOOKUP MENU')
-                        print('-----------------------------')
-                        get_lookup_help()
-                else:
-                    print('\nInvalid entry.')
-                    get_lookup_help()
-                lookup_input = input(':').lower()
-            lookup_input = ""
+            ui.lookup_menu(lookup_input, deliveries_completed)
 
     elif user_input == 'help':
-        get_help()
+        ui.get_help(lookup_input, deliveries_completed)
 
     else:
         print('\nInvalid command.')
-        get_help()
+        ui.get_help(lookup_input, deliveries_completed)
 
     user_input = input(':').lower()
 if user_input == 'quit':
-    exit_program()
+    ui.exit_program()
 # lookup.all_packages(7)
 # lookup.all_packages(9)
 # lookup.all_packages(10)
