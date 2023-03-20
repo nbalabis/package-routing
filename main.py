@@ -33,13 +33,27 @@ while user_input != 'quit':
             truck2.print_packages()
             truck3.print_packages()
             start()
-            # TODO: PRINT CASE IF PACKAGE WAS DELIVERED LATE
-            print(f"""----------------------------------------------------
-        ALL PACKAGES SUCCESSFULLY DELIVERED!
-The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}
-The trucks traveled a total distance of {truck1.total_distance + truck2.total_distance + truck3.total_distance} miles
-----------------------------------------------------
-""")
+            late_packages = []
+            for package in packages.get_all():
+                if package.on_time is False:
+                    late_packages.append(package.id)
+            if len(late_packages) > 0:
+                print('--------------------------------------------------')
+                print('               ERROR: LATE DELIVERY')
+                print('Package(s): ', end="")
+                for package_id in late_packages:
+                    print(package_id, end=" ")
+                print('were delivered late.')
+                print('Please re-load trucks and try again.')
+                print('--------------------------------------------------\n')
+            else:
+                print('----------------------------------------------------')
+                print('        ALL PACKAGES SUCCESSFULLY DELIVERED!')
+                print(
+                    f'The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}')
+                print(
+                    f'The trucks traveled a total distance of {truck1.total_distance + truck2.total_distance + truck3.total_distance} miles')
+                print('----------------------------------------------------\n')
             deliveries_completed = True
     user_input = input(':').lower()
 if user_input == 'quit':
