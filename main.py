@@ -12,6 +12,16 @@ def start():
     truck3.start()
 
 
+def get_help():
+    print('\nPlease choose from the list of available commands:')
+    if not deliveries_completed:
+        print("     -Type 'start' to begin package routing")
+    else:
+        print("     -Type 'info' to see an overview of the package deliveries")
+    print("     -Type 'quit' to exit the program")
+    print("     -Type 'help' at any time to see a list of all available commands\n")
+
+
 print("""
 ----------------------------------------------------------------------
                  WELCOME TO THE WGUPS ROUTING PROGRAM
@@ -26,7 +36,8 @@ user_input = input(":").lower()
 while user_input != 'quit':
     if user_input == 'start':
         if deliveries_completed:
-            print('\nDeliveries have already been completed.\n')
+            print('\nDeliveries have already been completed.')
+            print("     -Type 'info' to see an overview of the package deliveries\n")
         else:
             print("")
             truck1.print_packages()
@@ -55,8 +66,32 @@ while user_input != 'quit':
                     f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
                 print('----------------------------------------------------\n')
             deliveries_completed = True
+
+    elif user_input == 'info':
+        if not deliveries_completed:
+            print("\nDeliveries have not been completed yet.")
+            print("     -Type 'start' to begin package routing\n")
+        else:
+            print('\n----------------------------------------------------')
+            print('    ALL PACKAGES SUCCESSFULLY DELIVERED ON TIME!')
+            print(
+                f'The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}')
+            print(
+                f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
+            print('----------------------------------------------------\n')
+
+    elif user_input == 'help':
+        get_help()
+
+    else:
+        print('\nInvalid command.')
+        get_help()
+
     user_input = input(':').lower()
 if user_input == 'quit':
+    print('\n-------------------------------------------------------')
+    print('     THANK YOU FOR USING THE WGUPS ROUTING PROGRAM')
+    print('-------------------------------------------------------')
     exit()
 # lookup.all_packages(7)
 # lookup.all_packages(9)
