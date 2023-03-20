@@ -13,13 +13,38 @@ def start():
 
 
 def get_help():
-    print('\nPlease choose from the list of available commands:')
-    if not deliveries_completed:
-        print("     -Type 'start' to begin package routing")
+    if lookup_input == "":
+        print('\nPlease choose from the list of available commands:')
+        if not deliveries_completed:
+            print("     -Type 'start' to begin package routing")
+        else:
+            print("     -Type 'lookup' to view packages at any point during the delivery process")
+            print("     -Type 'info' to see an overview of the package deliveries")
     else:
-        print("     -Type 'info' to see an overview of the package deliveries")
+        print('---------------------------------------------------------------------')
+        print("     -Type 'cancel' to leave the Package Lookup Menu")
     print("     -Type 'quit' to exit the program")
     print("     -Type 'help' at any time to see a list of all available commands\n")
+
+
+def get_lookup_help():
+    print("\nChoose an identifier to view a filtered list of packages at a given time:")
+    print("     -Type 'id' to view a specific package")
+    print("     -Type 'address' to filter by delivery address")
+    print("     -Type 'deadline' to filter by delivery deadline")
+    print("     -Type 'city' to filter by delivery city")
+    print("     -Type 'zip' to filter by delivery zip code")
+    print("     -Type 'weight' to filter by package weight")
+    print("     -Type 'status' to filter by delivery status\n")
+    print('                                   -OR-\n')
+    print("     -Type 'all' to view the statuses of all packages at a given time\n")
+
+
+def exit_program():
+    print('\n-------------------------------------------------------')
+    print('     THANK YOU FOR USING THE WGUPS ROUTING PROGRAM')
+    print('-------------------------------------------------------')
+    exit()
 
 
 print("""
@@ -33,6 +58,7 @@ Please choose from the list of available commands:
 """)
 
 user_input = input(":").lower()
+lookup_input = ""
 while user_input != 'quit':
     if user_input == 'start':
         if deliveries_completed:
@@ -64,7 +90,11 @@ while user_input != 'quit':
                     f'The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}')
                 print(
                     f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
-                print('----------------------------------------------------\n')
+                print('----------------------------------------------------')
+                print('The following commands are now available:')
+                print("     -Type 'lookup' to view packages at any point during the delivery process")
+                print("     -Type 'info' to see an overview of the package deliveries\n")
+
             deliveries_completed = True
 
     elif user_input == 'info':
@@ -80,6 +110,22 @@ while user_input != 'quit':
                 f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
             print('----------------------------------------------------\n')
 
+    elif user_input == 'lookup':
+        if not deliveries_completed:
+            print("\nDeliveries have not been completed yet.")
+            print("     -Type 'start' to begin package routing\n")
+        else:
+            get_lookup_help()
+            lookup_input = input(':').lower()
+            while lookup_input != 'cancel':
+                if lookup_input == 'quit':
+                    exit_program()
+                elif lookup_input == 'help':
+                    get_lookup_help()
+                    get_help()
+                lookup_input = input(':').lower()
+            lookup_input = ""
+
     elif user_input == 'help':
         get_help()
 
@@ -89,10 +135,7 @@ while user_input != 'quit':
 
     user_input = input(':').lower()
 if user_input == 'quit':
-    print('\n-------------------------------------------------------')
-    print('     THANK YOU FOR USING THE WGUPS ROUTING PROGRAM')
-    print('-------------------------------------------------------')
-    exit()
+    exit_program()
 # lookup.all_packages(7)
 # lookup.all_packages(9)
 # lookup.all_packages(10)
