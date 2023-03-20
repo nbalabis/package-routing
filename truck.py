@@ -30,8 +30,19 @@ class Truck:
         for package in packages_to_deliver:
             package.update_status('Delivered')
             package.delivery_time = self.time
-            print(f'     Package {package.id} delivered at {str(self.time)}')
-            print(f'          Deadline: {package.deadline}')
+            deadline = None
+            if package.deadline == "EOD":
+                deadline = convert_time.to_epoch(17)
+            else:
+                deadline_hour = int(package.deadline[0:package.deadline.find(':')])
+                deadline_minute = int(package.deadline[package.deadline.find(':') + 1:package.deadline.find(' ')])
+                deadline = convert_time.to_epoch(deadline_hour, deadline_minute)
+            on_time = None
+            if self.time <= deadline:
+                on_time = 'on time'
+            else:
+                on_time = 'LATE'
+            print(f'     {convert_time.to_readable(self.time)}: sPackage {package.id} delivered {on_time}')
             self.packages.remove(package)
 
     def get_packages(self):
