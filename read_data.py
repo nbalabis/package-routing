@@ -39,7 +39,14 @@ with open('./data/package_info.csv') as package_csv:
     for package_data in package_reader:
         package_id = int(package_data[0])
         delivery_location = locations.get(package_data[1])
-        packages.add(package_id, Package(package_data, delivery_location))
+        deadline_str = package_data[5]
+        if deadline_str == "EOD":
+            deadline = convert_time.to_epoch(17)
+        else:
+            deadline_hour = int(deadline_str[0:deadline_str.find(':')])
+            deadline_minute = int(deadline_str[deadline_str.find(':') + 1:deadline_str.find(' ')])
+            deadline = convert_time.to_epoch(deadline_hour, deadline_minute)
+        packages.add(package_id, Package(package_data, delivery_location, deadline))
 
         # Load trucks
         if packages.get(package_id).notes == 'Can only be on truck 2':

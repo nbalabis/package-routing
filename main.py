@@ -33,11 +33,12 @@ while user_input != 'quit':
             truck2.print_packages()
             truck3.print_packages()
             start()
-            print(f"""--------------------------------------------------------
-          All packages successfully delivered!
-     The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}
-     The trucks traveled a total distance of {truck1.total_distance + truck2.total_distance + truck3.total_distance} miles
---------------------------------------------------------
+            # TODO: PRINT CASE IF PACKAGE WAS DELIVERED LATE
+            print(f"""----------------------------------------------------
+        ALL PACKAGES SUCCESSFULLY DELIVERED!
+The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}
+The trucks traveled a total distance of {truck1.total_distance + truck2.total_distance + truck3.total_distance} miles
+----------------------------------------------------
 """)
             deliveries_completed = True
     user_input = input(':').lower()

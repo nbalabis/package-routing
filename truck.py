@@ -28,21 +28,12 @@ class Truck:
             if package.location == self.location:
                 packages_to_deliver.append(package)
         for package in packages_to_deliver:
-            package.update_status('Delivered')
-            package.delivery_time = self.time
-            deadline = None
-            if package.deadline == "EOD":
-                deadline = convert_time.to_epoch(17)
+            package.deliver(self.time)
+            if package.on_time:
+                status = 'on time'
             else:
-                deadline_hour = int(package.deadline[0:package.deadline.find(':')])
-                deadline_minute = int(package.deadline[package.deadline.find(':') + 1:package.deadline.find(' ')])
-                deadline = convert_time.to_epoch(deadline_hour, deadline_minute)
-            on_time = None
-            if self.time <= deadline:
-                on_time = 'on time'
-            else:
-                on_time = 'LATE'
-            print(f'     {convert_time.to_readable(self.time)}: sPackage {package.id} delivered {on_time}')
+                status = 'LATE'
+            print(f'     {convert_time.to_readable(self.time)}: Package {package.id} delivered {status}')
             self.packages.remove(package)
 
     def get_packages(self):
