@@ -48,11 +48,11 @@ while user_input != 'quit':
                 print('--------------------------------------------------\n')
             else:
                 print('----------------------------------------------------')
-                print('        ALL PACKAGES SUCCESSFULLY DELIVERED!')
+                print('    ALL PACKAGES SUCCESSFULLY DELIVERED ON TIME!')
                 print(
                     f'The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}')
                 print(
-                    f'The trucks traveled a total distance of {truck1.total_distance + truck2.total_distance + truck3.total_distance} miles')
+                    f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
                 print('----------------------------------------------------\n')
             deliveries_completed = True
     user_input = input(':').lower()

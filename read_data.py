@@ -27,11 +27,12 @@ with open('./data/location_names.csv') as location_csv:
 
 # Initialize trucks
 hub = locations.get('4001 South 700 East')
-on_time_departure = convert_time.to_epoch(8)
-late_departure = convert_time.to_epoch(10, 20)
-truck1 = Truck(1, hub, on_time_departure)
-truck2 = Truck(2, hub, on_time_departure)
-truck3 = Truck(3, hub, late_departure)
+departure_1 = convert_time.to_epoch(8)
+departure_2 = convert_time.to_epoch(9, 5)
+departure_3 = convert_time.to_epoch(10, 20)
+truck1 = Truck(1, hub, departure_1)
+truck2 = Truck(2, hub, departure_2)
+truck3 = Truck(3, hub, departure_3)
 
 # Load package data into a hash table
 with open('./data/package_info.csv') as package_csv:
@@ -54,13 +55,18 @@ with open('./data/package_info.csv') as package_csv:
         elif package_id in [13, 14, 15, 16, 19, 20]:
             truck1.load_package(packages.get(package_id))
         elif packages.get(package_id).notes == 'Delayed on flight---will not arrive to depot until 9:05 am':
-            truck3.load_package(packages.get(package_id))
+            truck2.load_package(packages.get(package_id))
         elif packages.get(package_id).notes == 'Wrong address listed':
             truck3.load_package(packages.get(package_id))
-        else:
+        elif packages.get(package_id).deadline < convert_time.to_epoch(17):
             if not truck1.is_full():
                 truck1.load_package(packages.get(package_id))
-            elif not truck3.is_full():
+            else:
+                truck2.load_package(packages.get(package_id))
+        else:
+            if not truck3.is_full():
                 truck3.load_package(packages.get(package_id))
+            elif not truck1.is_full():
+                truck1.load_package(packages.get(package_id))
             else:
                 truck2.load_package(packages.get(package_id))
