@@ -47,6 +47,16 @@ def exit_program():
     exit()
 
 
+def get_info():
+    print('----------------------------------------------------')
+    print('    ALL PACKAGES SUCCESSFULLY DELIVERED ON TIME!')
+    print(
+        f'The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}')
+    print(
+        f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
+    print('----------------------------------------------------')
+
+
 print("""
 ----------------------------------------------------------------------
                  WELCOME TO THE WGUPS ROUTING PROGRAM
@@ -84,13 +94,7 @@ while user_input != 'quit':
                 print('Please re-load trucks and try again.')
                 print('--------------------------------------------------\n')
             else:
-                print('----------------------------------------------------')
-                print('    ALL PACKAGES SUCCESSFULLY DELIVERED ON TIME!')
-                print(
-                    f'The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}')
-                print(
-                    f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
-                print('----------------------------------------------------')
+                get_info()
                 print('The following commands are now available:')
                 print("     -Type 'lookup' to view packages at any point during the delivery process")
                 print("     -Type 'info' to see an overview of the package deliveries\n")
@@ -102,19 +106,18 @@ while user_input != 'quit':
             print("\nDeliveries have not been completed yet.")
             print("     -Type 'start' to begin package routing\n")
         else:
-            print('\n----------------------------------------------------')
-            print('    ALL PACKAGES SUCCESSFULLY DELIVERED ON TIME!')
-            print(
-                f'The final truck returned to the Hub at {convert_time.to_readable(max([truck1.time, truck2.time, truck3.time]))}')
-            print(
-                f'The trucks traveled a total distance of {str("%.1f" % (truck1.total_distance + truck2.total_distance + truck3.total_distance))} miles')
-            print('----------------------------------------------------\n')
+            print("")
+            get_info()
+            print("")
 
     elif user_input == 'lookup':
         if not deliveries_completed:
             print("\nDeliveries have not been completed yet.")
             print("     -Type 'start' to begin package routing\n")
         else:
+            print('-----------------------------')
+            print('     PACKAGE LOOKUP MENU')
+            print('-----------------------------')
             get_lookup_help()
             lookup_input = input(':').lower()
             while lookup_input != 'cancel':
@@ -123,6 +126,38 @@ while user_input != 'quit':
                 elif lookup_input == 'help':
                     get_lookup_help()
                     get_help()
+                elif lookup_input == 'all':
+                    print('\nEnter a valid time between 00:00 and 23:59\n')
+                    menu_input = input(':').lower()
+                    while menu_input != 'cancel':
+                        if menu_input == 'quit':
+                            exit_program()
+                        elif menu_input == 'help':
+                            print('\nEnter a valid time between 00:00 and 23:59')
+                            get_help()
+                        else:
+                            try:
+                                hours = int(menu_input[0:menu_input.find(':')])
+                                minutes = int(menu_input[menu_input.find(':') + 1:len(menu_input)])
+                            except:
+                                print('\nInvalid entry.')
+                                print('Please enter a valid time between 00:00 and 23:59\n')
+                            else:
+                                if 24 > hours > -1 and 60 > minutes > -1 and ':' in menu_input:
+                                    lookup.all_packages(hours, minutes)
+                                else:
+                                    print('\nInvalid entry.')
+                                    print('Please enter a valid time between 00:00 and 23:59\n')
+
+                        menu_input = input(':').lower()
+                    if menu_input == 'cancel':
+                        print('-----------------------------')
+                        print('     PACKAGE LOOKUP MENU')
+                        print('-----------------------------')
+                        get_lookup_help()
+                else:
+                    print('\nInvalid entry.')
+                    get_lookup_help()
                 lookup_input = input(':').lower()
             lookup_input = ""
 

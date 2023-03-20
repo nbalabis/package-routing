@@ -4,7 +4,8 @@ from read_data import packages
 
 def all_packages(hours, minutes=0):
     epoch_time = convert_time.to_epoch(hours, minutes)
-    print('---ALL PACKAGES AT ' + convert_time.to_readable(epoch_time) + '---')
+    print('\n-------------------------------------------------------------------------')
+    print('                          ALL PACKAGES AT ' + convert_time.to_readable(epoch_time))
     delivered = []
     transit = []
     hub = []
@@ -30,4 +31,5 @@ def all_packages(hours, minutes=0):
     print('          ', end="")
     for package in delivered:
         print(str(package.id), end=" ")
-    print('\n')
+    print('\n-------------------------------------------------------------------------')
+    print("Lookup another time or type 'cancel' to return to the Package Lookup Menu\n")
