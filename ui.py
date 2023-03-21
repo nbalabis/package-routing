@@ -22,7 +22,7 @@ def exit_program():
     exit()
 
 
-def get_help(lookup_input, deliveries_completed):
+def get_help(lookup_input, deliveries_completed, menu_input=""):
     if lookup_input == "":
         print('\nPlease choose from the list of available commands:')
         if not deliveries_completed:
@@ -32,7 +32,10 @@ def get_help(lookup_input, deliveries_completed):
             print("     -Type 'info' to see an overview of the package deliveries")
     else:
         print('---------------------------------------------------------------------')
-        print("     -Type 'cancel' to leave the Package Lookup Menu")
+        if menu_input == "":
+            print("     -Type 'cancel' to leave the Package Lookup Menu")
+        else:
+            print("     -Type 'cancel' to return to the Package Lookup Menu")
     print("     -Type 'quit' to exit the program")
     print("     -Type 'help' at any time to see a list of all available commands\n")
 
@@ -62,7 +65,7 @@ def lookup_all_menu(lookup_input, deliveries_completed):
             exit_program()
         elif menu_input == 'help':
             print('\nEnter a valid time between 00:00 and 23:59')
-            get_help(lookup_input, deliveries_completed)
+            get_help(lookup_input, deliveries_completed, menu_input)
         else:
             time_to_lookup = validate_time(menu_input)
             if len(time_to_lookup) > 0:
@@ -84,7 +87,7 @@ def lookup_id_menu(lookup_input, deliveries_completed):
             exit_program()
         elif menu_input == 'help':
             print('\nEnter a valid package ID')
-            get_help(lookup_input, deliveries_completed)
+            get_help(lookup_input, deliveries_completed, menu_input)
         else:
             try:
                 package = packages.get(int(menu_input))
@@ -100,7 +103,7 @@ def lookup_id_menu(lookup_input, deliveries_completed):
                             exit_program()
                         elif menu_input == 'help':
                             print('\nEnter a valid time between 00:00 and 23:59')
-                            get_help(lookup_input, deliveries_completed)
+                            get_help(lookup_input, deliveries_completed, menu_input)
                         else:
                             time_to_lookup = validate_time(menu_input)
                             if len(time_to_lookup) > 0:
