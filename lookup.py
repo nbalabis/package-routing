@@ -33,3 +33,31 @@ def all_packages(hours, minutes=0):
         print(str(package.id), end=" ")
     print('\n-------------------------------------------------------------------------')
     print("Lookup another time or type 'cancel' to return to the Package Lookup Menu\n")
+
+
+def single_package(package, hours, minutes=0):
+    epoch_time = convert_time.to_epoch(hours, minutes)
+    print('\n-------------------------------------------------------------------------')
+    print(f'                          PACKAGE {package.id} AT {convert_time.to_readable(epoch_time)}')
+    print(f'ID: {package.id}')
+    print(f'ADDRESS: {package.location.address}')
+    print(f'CITY: {package.city}')
+    print(f'ZIP: {package.zip}')
+    print(f'WEIGHT: {package.mass}kg')
+    if package.notes != '':
+        print(f'NOTE: {package.notes}')
+    else:
+        print('NOTE: None')
+    print(f'DEADLINE: {convert_time.to_readable(package.deadline)}')
+    if package.delivery_time <= epoch_time:
+        print(f'STATUS: Delivered at {convert_time.to_readable(package.delivery_time)}')
+    elif package.load_time <= epoch_time:
+        print('STATUS: En Route')
+    else:
+        print('STATUS: At Hub')
+
+    # self.deadline = deadline
+    # self.mass = data[6]
+    # self.notes = data[7]
+    print('\n-------------------------------------------------------------------------')
+    print("Lookup another ID or type 'cancel' to return to the Package Lookup Menu\n")

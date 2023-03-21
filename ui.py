@@ -93,13 +93,33 @@ def lookup_id_menu(lookup_input, deliveries_completed):
                 print('Please enter a valid time package ID\n')
             else:
                 if package is not None:
-                    # get time input
-                    print(package)
+                    print('\nEnter a valid time between 00:00 and 23:59\n')
+                    menu_input = input(':').lower()
+                    while menu_input != 'cancel':
+                        if menu_input == 'quit':
+                            exit_program()
+                        elif menu_input == 'help':
+                            print('\nEnter a valid time between 00:00 and 23:59')
+                            get_help(lookup_input, deliveries_completed)
+                        else:
+                            time_to_lookup = validate_time(menu_input)
+                            if len(time_to_lookup) > 0:
+                                lookup.single_package(package, time_to_lookup[0], time_to_lookup[1])
+                                break
+
+                        menu_input = input(':').lower()
+                    if menu_input == 'cancel':
+                        break
                 else:
                     print('\nInvalid entry.')
-                    print('Please enter a valid time package ID\n')
+                    print('Please enter a valid package ID\n')
 
         menu_input = input(':').lower()
+    if menu_input == 'cancel':
+        print('\n-----------------------------')
+        print('     PACKAGE LOOKUP MENU')
+        print('-----------------------------')
+        get_lookup_help()
 
 
 def lookup_menu(lookup_input, deliveries_completed):

@@ -3,6 +3,8 @@ class Package:
         self.id = data[0]
         self.location = location
         self.deadline = deadline
+        self.city = data[2]
+        self.zip = data[4]
         self.mass = data[6]
         self.notes = data[7]
         self.status = 'At Hub'
