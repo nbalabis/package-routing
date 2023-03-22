@@ -1,3 +1,4 @@
+import convert_time
 import lookup
 from read_data import packages, locations
 
@@ -70,7 +71,6 @@ def lookup_all_menu(lookup_input, deliveries_completed):
             time_to_lookup = validate_time(menu_input)
             if len(time_to_lookup) > 0:
                 lookup.all_packages(time_to_lookup[0], time_to_lookup[1])
-
         menu_input = input(':').lower()
     if menu_input == 'cancel':
         print('\n-----------------------------')
@@ -116,7 +116,6 @@ def lookup_id_menu(lookup_input, deliveries_completed):
                 else:
                     print('\nInvalid entry.')
                     print('Please enter a valid package ID\n')
-
         menu_input = input(':').lower()
     if menu_input == 'cancel':
         print('\n-----------------------------')
@@ -161,9 +160,44 @@ def lookup_address_menu(lookup_input, deliveries_completed):
             else:
                 print('\nInvalid entry.')
                 print('Enter a valid delivery address\n')
-
         menu_input = input(':')
     if menu_input.lower() == 'cancel':
+        print('\n-----------------------------')
+        print('     PACKAGE LOOKUP MENU')
+        print('-----------------------------')
+        get_lookup_help()
+
+
+def lookup_deadline_menu(lookup_input, deliveries_completed):
+    print('\nEnter a valid deadline between 00:00 and 23:59\n')
+    menu_input = input(':').lower()
+    while menu_input != 'cancel':
+        if menu_input == 'quit':
+            exit_program()
+        elif menu_input == 'help':
+            print('\nEnter a valid deadline between 00:00 and 23:59')
+            get_help(lookup_input, deliveries_completed, menu_input)
+        else:
+            time_to_lookup = validate_time(menu_input)
+            if len(time_to_lookup) > 0:
+                selected_packages = []
+                epoch_time = convert_time.to_epoch(time_to_lookup[0], time_to_lookup[1])
+                for package in packages.get_all():
+                    if package.deadline <= epoch_time:
+                        selected_packages.append(package)
+                if len(selected_packages) < 1:
+                    print('\n-------------------------------------------------------------------------\n')
+
+                    print(
+                        f'There are no packages with a delivery deadline at or before {convert_time.to_readable(epoch_time)}')
+                    print('\n-------------------------------------------------------------------------')
+                    print(f"Lookup another deadline or type 'cancel' to return to the Package Lookup Menu\n")
+                else:
+                    print(
+                        f'Displaying all packages with a delivery deadline at or before {convert_time.to_readable(epoch_time)}')
+                    lookup.specific_packages("deadline", selected_packages, time_to_lookup[0], time_to_lookup[1])
+        menu_input = input(':').lower()
+    if menu_input == 'cancel':
         print('\n-----------------------------')
         print('     PACKAGE LOOKUP MENU')
         print('-----------------------------')
@@ -189,7 +223,7 @@ def lookup_menu(lookup_input, deliveries_completed):
         elif lookup_input == 'address':
             lookup_address_menu(lookup_input, deliveries_completed)
         elif lookup_input == 'deadline':
-            print('Deadline Menu')
+            lookup_deadline_menu(lookup_input, deliveries_completed)
         elif lookup_input == 'city':
             print('City Menu')
         elif lookup_input == 'zip':
