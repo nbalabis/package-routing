@@ -1,5 +1,5 @@
 import lookup
-from read_data import packages
+from read_data import packages, locations
 
 
 def get_lookup_help():
@@ -107,7 +107,7 @@ def lookup_id_menu(lookup_input, deliveries_completed):
                         else:
                             time_to_lookup = validate_time(menu_input)
                             if len(time_to_lookup) > 0:
-                                lookup.single_package(package, time_to_lookup[0], time_to_lookup[1])
+                                lookup.specific_packages("ID", [package], time_to_lookup[0], time_to_lookup[1])
                                 break
 
                         menu_input = input(':').lower()
@@ -119,6 +119,51 @@ def lookup_id_menu(lookup_input, deliveries_completed):
 
         menu_input = input(':').lower()
     if menu_input == 'cancel':
+        print('\n-----------------------------')
+        print('     PACKAGE LOOKUP MENU')
+        print('-----------------------------')
+        get_lookup_help()
+
+
+def lookup_address_menu(lookup_input, deliveries_completed):
+    print('\nEnter a valid delivery address\n')
+    menu_input = input(':')
+    while menu_input.lower() != 'cancel':
+        if menu_input.lower() == 'quit':
+            exit_program()
+        elif menu_input.lower() == 'help':
+            print('\nEnter a valid delivery address')
+            get_help(lookup_input, deliveries_completed, menu_input.lower())
+        else:
+            location = locations.get(menu_input)
+            if location is not None:
+                print('\nEnter a valid time between 00:00 and 23:59\n')
+                menu_input = input(':').lower()
+                while menu_input != 'cancel':
+                    if menu_input == 'quit':
+                        exit_program()
+                    elif menu_input == 'help':
+                        print('\nEnter a valid time between 00:00 and 23:59')
+                        get_help(lookup_input, deliveries_completed, menu_input)
+                    else:
+                        time_to_lookup = validate_time(menu_input)
+                        if len(time_to_lookup) > 0:
+                            selected_packages = []
+                            for package in packages.get_all():
+                                if package.location == location:
+                                    selected_packages.append(package)
+                            lookup.specific_packages("address", selected_packages, time_to_lookup[0], time_to_lookup[1])
+                            break
+
+                    menu_input = input(':').lower()
+                if menu_input == 'cancel':
+                    break
+            else:
+                print('\nInvalid entry.')
+                print('Enter a valid delivery address\n')
+
+        menu_input = input(':')
+    if menu_input.lower() == 'cancel':
         print('\n-----------------------------')
         print('     PACKAGE LOOKUP MENU')
         print('-----------------------------')
@@ -141,6 +186,18 @@ def lookup_menu(lookup_input, deliveries_completed):
             lookup_all_menu(lookup_input, deliveries_completed)
         elif lookup_input == 'id':
             lookup_id_menu(lookup_input, deliveries_completed)
+        elif lookup_input == 'address':
+            lookup_address_menu(lookup_input, deliveries_completed)
+        elif lookup_input == 'deadline':
+            print('Deadline Menu')
+        elif lookup_input == 'city':
+            print('City Menu')
+        elif lookup_input == 'zip':
+            print('Zip Menu')
+        elif lookup_input == 'weight':
+            print('Weight Menu')
+        elif lookup_input == 'status':
+            print('Status Menu')
         else:
             print('\nInvalid entry.')
             get_lookup_help()
