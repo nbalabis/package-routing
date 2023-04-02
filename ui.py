@@ -8,10 +8,6 @@ def get_lookup_help():
     print("     -Type 'id' to view a specific package")
     print("     -Type 'address' to filter by delivery address")
     print("     -Type 'deadline' to filter by delivery deadline")
-    print("     -Type 'city' to filter by delivery city")
-    print("     -Type 'zip' to filter by delivery zip code")
-    print("     -Type 'weight' to filter by package weight")
-    print("     -Type 'status' to filter by delivery status\n")
     print('                                   -OR-\n')
     print("     -Type 'all' to view the statuses of all packages at a given time\n")
 
@@ -224,14 +220,6 @@ def lookup_menu(lookup_input, deliveries_completed):
             lookup_address_menu(lookup_input, deliveries_completed)
         elif lookup_input == 'deadline':
             lookup_deadline_menu(lookup_input, deliveries_completed)
-        elif lookup_input == 'city':
-            print('City Menu')
-        elif lookup_input == 'zip':
-            print('Zip Menu')
-        elif lookup_input == 'weight':
-            print('Weight Menu')
-        elif lookup_input == 'status':
-            print('Status Menu')
         else:
             print('\nInvalid entry.')
             get_lookup_help()
