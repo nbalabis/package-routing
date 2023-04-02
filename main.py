@@ -1,11 +1,14 @@
+# Nicholas Balabis, Student ID: 001314467
+
 import ui
 from read_data import packages, locations, truck1, truck2, truck3
-import lookup
 import convert_time
 
+# Set initial delivery state
 deliveries_completed = False
 
 
+# Begin package routing for each truck
 def start():
     truck1.start()
     truck2.start()
@@ -13,6 +16,7 @@ def start():
     truck3.start()
 
 
+# Print an overview including time of completion and total distance traveled
 def get_info():
     print('----------------------------------------------------')
     print('    ALL PACKAGES SUCCESSFULLY DELIVERED ON TIME!')
@@ -23,6 +27,7 @@ def get_info():
     print('----------------------------------------------------')
 
 
+# Welcome message
 print("""
 ----------------------------------------------------------------------
                  WELCOME TO THE WGUPS ROUTING PROGRAM
@@ -33,6 +38,7 @@ Please choose from the list of available commands:
      -Type 'help' at any time to see a list of all available commands
 """)
 
+# Prompt user input and start UI flow
 user_input = input(":").lower()
 lookup_input = ""
 while user_input != 'quit':
@@ -93,7 +99,3 @@ while user_input != 'quit':
     user_input = input(':').lower()
 if user_input == 'quit':
     ui.exit_program()
-# lookup.all_packages(7)
-# lookup.all_packages(9)
-# lookup.all_packages(10)
-# lookup.all_packages(12, 30)

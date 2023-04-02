@@ -16,10 +16,12 @@ class Package:
     def update_status(self, status):
         self.status = status
 
+    # Update package delivery location
     def update_location(self, location):
         print('Updating package ' + str(self.id) + ' delivery address to ' + location.address + '\n')
         self.location = location
 
+    # Set package status to 'delivered' and add its delivery time
     def deliver(self, time):
         self.status = 'Delivered'
         self.delivery_time = time

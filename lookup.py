@@ -2,6 +2,7 @@ import convert_time
 from read_data import packages
 
 
+# Look up the status of every package at a given time
 def all_packages(hours, minutes=0):
     epoch_time = convert_time.to_epoch(hours, minutes)
     print('\n-------------------------------------------------------------------------')
@@ -35,6 +36,7 @@ def all_packages(hours, minutes=0):
     print("Lookup another time or type 'cancel' to return to the Package Lookup Menu\n")
 
 
+# Look up the statuses of a subset of packages at a given time
 def specific_packages(criteria, selected_packages, hours, minutes=0):
     epoch_time = convert_time.to_epoch(hours, minutes)
     print('\n-------------------------------------------------------------------------\n')

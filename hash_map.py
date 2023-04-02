@@ -11,7 +11,6 @@ class HashMap:
         return hash_key % self.size
 
     # Add a key-value pair to the hash table or update an existing one
-    # I want to prevent accidentally updating
     def add(self, key, value):
         hashed_key = self.__get_hash(key)
         new_key_value = [key, value]
@@ -48,12 +47,7 @@ class HashMap:
                     return key_value[1]
         return None
 
-    def print(self):
-        print('---HASHMAP---')
-        for item in self.map:
-            if item is not None:
-                print(str(item[0]))
-
+    # Return a list of all items in the hash map
     def get_all(self):
         all_items = []
         for item in self.map:

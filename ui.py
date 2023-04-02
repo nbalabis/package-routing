@@ -3,6 +3,7 @@ import lookup
 from read_data import packages, locations
 
 
+# Display help for the lookup menu
 def get_lookup_help():
     print("\nChoose an identifier to view a filtered list of packages at a given time:")
     print("     -Type 'id' to view a specific package")
@@ -12,6 +13,7 @@ def get_lookup_help():
     print("     -Type 'all' to view the statuses of all packages at a given time\n")
 
 
+# Display exit message
 def exit_program():
     print('\n-------------------------------------------------------')
     print('     THANK YOU FOR USING THE WGUPS ROUTING PROGRAM')
@@ -19,6 +21,7 @@ def exit_program():
     exit()
 
 
+# Display general help menu with available commands
 def get_help(lookup_input, deliveries_completed, menu_input=""):
     if lookup_input == "":
         print('\nPlease choose from the list of available commands:')
@@ -37,6 +40,7 @@ def get_help(lookup_input, deliveries_completed, menu_input=""):
     print("     -Type 'help' at any time to see a list of all available commands\n")
 
 
+# Validate a time input
 def validate_time(time_input):
     try:
         hours = int(time_input[0:time_input.find(':')])
@@ -54,6 +58,7 @@ def validate_time(time_input):
             return []
 
 
+# Menu to look up the status of all packages
 def lookup_all_menu(lookup_input, deliveries_completed):
     print('\nEnter a valid time between 00:00 and 23:59\n')
     menu_input = input(':').lower()
@@ -75,6 +80,7 @@ def lookup_all_menu(lookup_input, deliveries_completed):
         get_lookup_help()
 
 
+# Menu to look up the status of a package with a particular ID
 def lookup_id_menu(lookup_input, deliveries_completed):
     print('\nEnter a valid package ID\n')
     menu_input = input(':').lower()
@@ -120,6 +126,7 @@ def lookup_id_menu(lookup_input, deliveries_completed):
         get_lookup_help()
 
 
+# Menu to look up the status of packages sharing the same delivery address
 def lookup_address_menu(lookup_input, deliveries_completed):
     print('\nEnter a valid delivery address\n')
     menu_input = input(':')
@@ -164,6 +171,7 @@ def lookup_address_menu(lookup_input, deliveries_completed):
         get_lookup_help()
 
 
+# Menu to look up the statuses of all packages sharing the same deadline
 def lookup_deadline_menu(lookup_input, deliveries_completed):
     print('\nEnter a valid deadline between 00:00 and 23:59\n')
     menu_input = input(':').lower()
@@ -200,6 +208,7 @@ def lookup_deadline_menu(lookup_input, deliveries_completed):
         get_lookup_help()
 
 
+# Lookup menu with all lookup options displayed
 def lookup_menu(lookup_input, deliveries_completed):
     print('\n-----------------------------')
     print('     PACKAGE LOOKUP MENU')
