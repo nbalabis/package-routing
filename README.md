@@ -35,7 +35,6 @@
   - [Run Locally](#running-run-locally)
 - [License](#warning-license)
 - [Contact](#handshake-contact)
-- [Acknowledgements](#gem-acknowledgements)
 
 <!-- About the Project -->
 
@@ -91,17 +90,15 @@ Keep in mind that the supervisor should be able to see, at assigned points, the 
 ### :space_invader: Tech Stack
 
 [![Python][python.js]][python-url]
-[![MaterialUI][mui.js]][mui-url]
-[![HTML5][html5.js]][html5-url]
-[![CSS3][css3.js]][css3-url]
 
 <!-- Features -->
 
 ### :dart: Features
 
-- Create and save custom color palettes
-- Copy hex, rgb, and rgba values from any saved palette
-- View different light levels for each color
+- Determine efficient delivery route for each truck
+- Deliver all packages on time and within constraints
+- Look up the status of all packages at a given time
+- Look up packages by id, delivery deadline, or delivery address
 
 <!-- Getting Started -->
 
@@ -111,7 +108,7 @@ Keep in mind that the supervisor should be able to see, at assigned points, the 
 
 ### :bangbang: Prerequisites
 
-This project requires the latest versions of node and npm
+This project requires the latest version Python
 
 <!-- Run Locally -->
 
@@ -129,23 +126,13 @@ Go to the project directory
   cd package-routing
 ```
 
-Install dependencies
+Run the main file
 
 ```bash
-  npm install
+  python3 main.py
 ```
 
-Start the server
-
-```bash
-  npm start
-```
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the program in the terminal.
 
 <!-- License -->
 
@@ -161,19 +148,6 @@ Nicholas Balabis - [LinkedIn](https://www.linkedin.com/in/nicholas-balabis-09457
 
 Project Link: [https://github.com/nbalabis/package-routing](https://github.com/nbalabis/package-routing)
 
-<!-- Acknowledgments -->
-
-## :gem: Acknowledgements
-
-Some awesome libraries used for this project:
-
-- [rc-slider](https://github.com/react-component/slider)
-- [emoji-mart](https://github.com/missive/emoji-mart)
-- [chroma-js](https://gka.github.io/chroma.js/)
-
-Built with the help of:
- 
-- Colt Steele's [Modern React Bootcamp](https://www.udemy.com/course/modern-react-bootcamp/?utm_source=adwords&utm_medium=udemyads&utm_campaign=React_v.PROF_la.EN_cc.US_ti.7450&utm_content=deal4584&utm_term=_._ag_79286082406_._ad_532133511517_._kw__._de_c_._dm__._pl__._ti_dsa-774930034049_._li_9030078_._pd__._&matchtype=&gclid=Cj0KCQjwz96WBhC8ARIsAATR253VAr-06lVSB7NL3zJnGHIjpNQYRCsNzzlBPznigWpnLIXavB-Os5caAhw7EALw_wcB)
 
 <div align="center"> 
   <img src="assets/quit-message.png" alt="exit message" />
@@ -188,11 +162,5 @@ Built with the help of:
 [lastcommit-shield]: https://img.shields.io/github/last-commit/nbalabis/package-routing.svg?style=for-the-badge
 [license-shield]: https://img.shields.io/github/license/nbalabis/package-routing.svg?style=for-the-badge
 [license-url]: https://github.com/nbalabis/package-routing/blob/main/LICENSE
-[python.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[react-url]: https://reactjs.org/
-[mui.js]: https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=FFFFFF
-[mui-url]: https://mui.com
-[html5.js]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=FFFFFF
-[html5-url]: https://developer.mozilla.org/en-US/docs/Glossary/HTML5
-[css3.js]: https://img.shields.io/badge/CSS3-d8dee3?style=for-the-badge&logo=css3&logoColor=1572B6
-[css3-url]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[python.js]: https://img.shields.io/badge/Python-3776ab?style=for-the-badge&logo=python&logoColor=FFD343
+[python-url]: https://www.python.org
